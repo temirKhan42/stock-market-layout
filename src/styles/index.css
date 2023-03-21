@@ -1,0 +1,204 @@
+:root {
+  font-size: 16px;
+  --blue: rgb(41, 98, 255);
+  --red: rgb(242, 54, 69);
+  --gray: rgb(240, 243, 250);
+  --dgray: rgb(106, 109, 120);
+  --h1: 36px;
+  --h2: 20px;
+  --h3: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: white;
+  font-size: 12px;
+  font-weight: normal;
+  color: black;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  height: fit-content;
+}
+
+a {
+  text-decoration: none;
+  transition: all 0.1s ease-in;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.h1 {
+  font-size: 36px;
+}
+
+.h2 {
+  font-size: 20px;
+}
+
+.h3 {
+  font-size: 16px;
+}
+
+.bc-bl {
+  background-color: var(--blue);
+}
+
+.bc-rd {
+  background-color: var(--red);
+}
+
+.bc-gr {
+  background-color: var(--gray);
+}
+
+.bc-wt {
+  background-color: white;
+}
+
+.c-bl {
+  color: var(--blue);
+}
+
+.c-rd {
+  color: var(--red);
+}
+
+.c-gr {
+  color: var(--gray);
+}
+
+.c-wt {
+  color: white;
+}
+
+.flex {
+  display: flex;
+}
+
+.jc-c {
+  justify-content: center;
+}
+
+.ai-c {
+  align-items: center;
+}
+
+.ai-e {
+  align-items: end;
+}
+
+.grid {
+  display: grid;
+}
+
+.fw-b {
+  font-weight: bold;
+}
+
+.mc {
+  margin: 0 auto;
+}
+
+.mb-1 {
+  margin-bottom: 1rem;
+}
+
+.mb-2 {
+  margin-bottom: 1.25rem;
+}
+
+.mb-3 {
+  margin-bottom: 1.875rem;
+}
+
+.mb-4 {
+  margin-bottom: 2.8125rem;
+}
+
+.mb-5 {
+  margin-bottom: 3.125rem;
+}
+
+.mb-6 {
+  margin-bottom: 4.375rem;
+}
+
+.ta-c {
+  text-align: center;
+}
+
+.tt-up {
+  text-transform: uppercase;
+}
+
+.p-f {
+  position: fixed;
+}
+
+.p-a {
+  position: absolute;
+}
+
+.lh-0 {
+  line-height: 0;
+}
+
+.lh-1 {
+  line-height: 1;
+}
+
+.lh-2 {
+  line-height: 1.2;
+}
+
+.lh-3 {
+  line-height: 1.5;
+}
+
+.d-on-off {
+  display: block;
+}
+
+.d-off-on {
+  display: none;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+
+
+
+
+
+
+

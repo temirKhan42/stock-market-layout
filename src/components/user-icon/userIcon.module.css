@@ -1,0 +1,52 @@
+.icon {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  border-radius: 50%;
+}
+
+.icon:hover {
+  cursor: pointer;
+  background-color: var(--gray);
+}
+
+.menu {
+  position: absolute;
+  left: 100vw;
+  transform: translate(-110%);
+  z-index: 10;
+  width: 320px;
+  border: 1px solid var(--gray);
+  font-size: 1rem;
+}
+
+.menu>ul {
+  padding: 8px 0;
+}
+
+.menu>ul:first-child {
+  border-bottom: 1px solid var(--gray);
+}
+
+.menu>ul>li {
+  padding: 6px 20px;
+}
+
+.menu>ul>li:hover {
+  cursor: pointer;
+  background-color: var(--gray);
+}
+
+.menu-icon {
+  display: flex;
+  align-items: center;
+  color: var(--blue);
+}
+
+.menu-icon>img {
+  margin-right: 0.5rem;
+}
+
+

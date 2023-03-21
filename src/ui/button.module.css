@@ -1,0 +1,17 @@
+.button {
+  padding: 8px 16px;
+  background-color: var(--blue);
+  border-radius: 1rem;
+}
+
+.button>button {
+  padding: 0;
+  margin: 0;
+  font-size: 1rem;
+  display: block;
+  color: white;
+}
+
+.button>button:hover {
+  cursor: pointer;
+}

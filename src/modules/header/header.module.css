@@ -1,0 +1,27 @@
+.header {
+  border-bottom: 1px solid var(--gray);
+}
+
+.container {
+  max-width: 1020px;
+  margin: 0 auto;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+}
+
+.title img {
+  border-radius: 50%;
+}
+
+.title h1 {
+  margin-left: 0.5em;
+  font-size: var(--h1);
+  text-transform: uppercase;
+}
+
+.nav {
+  margin-top: 26px;
+}

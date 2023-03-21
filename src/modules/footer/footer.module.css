@@ -1,0 +1,20 @@
+.footer {
+  padding: 10px 32px 20px;
+  background-color: black;
+  color: var(--dgray);
+  text-align: center;
+  font-size: 14px;
+}
+
+.container {
+  border-top: 1px solid var(--dgray);
+}
+
+.footer a {
+  cursor: pointer;
+  color: var(--blue);
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}

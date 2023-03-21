@@ -1,0 +1,13 @@
+.nav-item {
+  padding: 0.5rem 1rem;
+  margin: 12px 0;
+  text-transform: capitalize;
+  font-size: 1rem;
+  color: black;
+}
+
+.nav-item:hover {
+  cursor:default;
+  border-radius: 2em;
+  background-color: var(--gray);
+}
