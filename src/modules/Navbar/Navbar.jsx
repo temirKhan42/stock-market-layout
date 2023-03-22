@@ -3,14 +3,13 @@ import style from './navbar.module.css';
 import Logo from "../../components/logo/Logo";
 import Nav from "../../components/nav/Nav";
 import UserIcon from "../../components/user-icon/UserIcon";
-import Button from "../../ui/Button";
+import Button from "../../ui/button/Button";
 
 
 function Navbar() {
   const navigate = useNavigate();
 
-  const handleGetStarted = (e) => {
-    e.preventDefault();
+  const handleGetStarted = () => {
     navigate('/');    
   }
 

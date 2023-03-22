@@ -1,18 +1,38 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import style from './table.module.css';
-import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useLocation, Link  } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { getPageStocks } from "./utils";
+import { updateSymbols, updateStocks } from '../../store/slices/stockSlice.js';
+import Button from "./Button";
 
 export function Table() {
-  const [stockList, setStockList] = useState([]);
   const location = useLocation();
-  const stocks = useSelector((state) => state.stockSlice.stocks)
+  const { stocks, symbols } = useSelector((state) => state.stockSlice)
+  const dispatch = useDispatch();
+  const currentPageIndex = parseInt(location.pathname.split('/').reverse()[0]);
 
   useEffect(() => {
-    const currentStockUnit = parseInt(location.pathname.split('/').reverse()[0]);
-    console.log(stocks);
-    setStockList(stocks[currentStockUnit-1]);
-  },[stockList]);
+    async function updateStore() {
+      const [newStocks, newSymbols] = await getPageStocks(currentPageIndex, symbols);
+      dispatch(updateSymbols(newSymbols));
+      dispatch(updateStocks(newStocks));
+    }
+
+    if (symbols.length > 0) {
+      updateStore();
+    }
+   },[location, symbols]);
+
+  const getLeft = () => {
+    const currentPath = location.pathname.split('/').slice(0, -1).join('/');
+    return currentPageIndex-1 > 0 ? `${currentPath}/${currentPageIndex-1}` : `${currentPath}/${currentPageIndex}`;
+  };
+
+  const getRight = () => {
+    const currentPath = location.pathname.split('/').slice(0, -1).join('/');
+    return `${currentPath}/${currentPageIndex+1}`;
+  };
 
   const pretifyNum = (num) => {
     const n = `${num}`;
@@ -37,7 +57,7 @@ export function Table() {
             <th scope="col">Hight Price</th>
             <th scope="col">Time</th>
             <th scope="col">Change % 1D</th>
-            <th scope="col">Change D</th>
+            <th scope="col">Change 1D</th>
             <th scope="col">YTD Change</th>
             <th scope="col">Volume 1D</th>
             <th scope="col">Volume * Price 1D</th>
@@ -46,9 +66,9 @@ export function Table() {
             <th scope="col">52-Week High</th>
           </tr>
         </thead>
-        {/* <tbody className={style['table-body']}>
-          {stockList.length > 0 ?
-            stockList.map((stock) => {
+        <tbody className={style['table-body']}>
+          {stocks.length > 0 ?
+            stocks.map((stock) => {
               const currency = stock?.currency;
               const avgTotalVolume = pretifyNum(parseInt(stock?.avgTotalVolume));
               const volTimesPrice = pretifyNum(parseInt(stock?.avgTotalVolume) * parseInt(stock?.latestPrice));
@@ -60,54 +80,58 @@ export function Table() {
                     <span>{stock?.companyName}</span>
                   </th>
                   <td>
-                    <span>{stock?.latestPrice}</span> <span className={style.currency}>{currency}</span>
+                    <span>{stock?.latestPrice || 0}</span> <span className={style.currency}>{currency}</span>
                   </td>
                   <td>
                     <span>{stock?.latestTime}</span>
                   </td>
                   <td>
-                    <span>{stock?.low}</span> <span className={style.currency}>{currency}</span>
+                    <span>{stock?.low || 0}</span> <span className={style.currency}>{currency}</span>
                   </td>
                   <td>
-                    <span>{stock?.lowTime}</span>
+                    <span>{new Date(stock?.lowTime).toLocaleTimeString()}</span>
                   </td>
                   <td>
-                    <span>{stock?.high}</span> <span className={style.currency}>{currency}</span>
+                    <span>{stock?.high || 0}</span> <span className={style.currency}>{currency}</span>
                   </td>
                   <td>
-                    <span>{stock?.highTime}</span>
+                    <span>{new Date(stock?.highTime).toLocaleTimeString()}</span>
                   </td>
                   <td>
-                    <span>{stock?.changePercent}%</span>
+                    <span>{stock?.changePercent || 0}%</span>
                   </td>
                   <td>
-                    <span>{stock?.change}</span> <span className={style.currency}>{currency}</span>
+                    <span>{stock?.change || 0}</span> <span className={style.currency}>{currency}</span>
                   </td>
                   <td>
-                    <span>{stock?.ytdChange}</span> <span className={style.currency}>{currency}</span>
+                    <span>{stock?.ytdChange || 0}</span> <span className={style.currency}>{currency}</span>
                   </td>
                   <td>
-                    <span>{avgTotalVolume}</span>
+                    <span>{avgTotalVolume || 0}</span>
                   </td>
                   <td>
-                    <span>{volTimesPrice}</span>
+                    <span>{volTimesPrice || 0}</span>
                   </td>
                   <td>
-                    <span>{marketCap}</span> <span className={style.currency}>{currency}</span>
-                  </td>
-                  <td>
-                    <span>{stock?.week52High}</span>
+                    <span>{marketCap || 0}</span> <span className={style.currency}>{currency}</span>
                   </td>
                   <td>
                     <span>{stock?.week52Low}</span>
+                  </td>
+                  <td>
+                    <span>{stock?.week52High}</span>
                   </td>
                 </tr>
               )
             }) : null
           }
-        </tbody> */}
-        {stocks ? console.log(stocks) : null}
+        </tbody>
       </table>
+
+      <div className="flex jc-sb">
+        <Button title="Left" path={getLeft()} disabled={currentPageIndex-1 === 0} />
+        <Button title="Right" path={getRight()} />
+      </div>
     </div>
   )
 }

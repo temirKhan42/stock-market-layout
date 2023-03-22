@@ -1,4 +1,5 @@
 import { getStocksData } from "../server";
+import _ from "lodash";
 
 export const splitStocksPerUnit = (list, unit = 10) => {
   const newList = [];
@@ -8,9 +9,9 @@ export const splitStocksPerUnit = (list, unit = 10) => {
   return newList;
 }
 
-export const getStockDataPerUnit = async (symbols, index) => {
+export const getStockDataPerUnit = async (symbols) => {
   try {
-    const delay = (index+1)*1200;
+    const delay = 500;
     return new Promise((resolve) => {
       setTimeout(() => {
         const data = getStocksData(symbols);
@@ -20,4 +21,27 @@ export const getStockDataPerUnit = async (symbols, index) => {
   } catch(err) {
     throw err;
   }
+}
+
+export const getPageStocks = async (currentPageIndex, symbols) => {
+  let newSymbols = symbols;
+  
+  const r = async (stocks, lostSymbols) => {
+    if (stocks.length === 10) return stocks;
+
+    if (lostSymbols.length > 0) {
+      newSymbols = _.difference(newSymbols, lostSymbols);
+    } 
+
+    const list = splitStocksPerUnit(newSymbols, 10);
+    const symbolsToGet = list[currentPageIndex-1]?.join();
+    const stocksData = await getStockDataPerUnit(symbolsToGet);
+
+    const losted = _.difference(list[currentPageIndex-1], stocksData.map((s) => s?.symbol))
+    return r(stocksData, losted);
+  }
+
+  const result = await r([], []);
+
+  return [result, newSymbols];
 }
